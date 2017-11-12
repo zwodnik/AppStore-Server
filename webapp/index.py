@@ -42,8 +42,18 @@ def admin():
         gimage = base64.b64encode(request.files['gimage'].read())
 
         if len(errors) == 0:
+
+            baseEncodedImage = "%s" % base64.b64encode(request.files['gimage'].read())
+            if len(baseEncodedImage) >= 3:
+                baseEncodedImage = baseEncodedImage[2:-1]
+
+            baseEncodedIcon = "%s" % base64.b64encode(request.files['gicon'].read())
+            if len(baseEncodedImage) >= 3:
+                baseEncodedIcon = baseEncodedIcon[2:-1]
             data = {
                 "description": "%s" % gdescription,
+                "image": baseEncodedImage,
+                "icon": baseEncodedIcon,
                 "name": "%s" % gname,
                 "version": "%s" % gversion,
             }
@@ -116,9 +126,20 @@ def edit(id):
                 gimage = base64.b64encode(gimage)
 
         if len(errors) == 0:
+
+            baseEncodedImage = "%s" % base64.b64encode(request.files['gimage'].read())
+            if len(baseEncodedImage) >= 3:
+                baseEncodedImage = baseEncodedImage[2:-1]
+
+            baseEncodedIcon = "%s" % base64.b64encode(request.files['gicon'].read())
+            if len(baseEncodedImage) >= 3:
+                baseEncodedIcon = baseEncodedIcon[2:-1]
+
             data = {
                 "id" : "%s" % gid,
                 "description": "%s" % gdescription,
+                "image": baseEncodedImage,
+                "icon": baseEncodedIcon,
                 "name": "%s" % gname,
                 "version": "%s" % gversion,
             }
