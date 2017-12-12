@@ -1,27 +1,34 @@
 package edu.inf.store.domain
 
 import javax.persistence.*
+import javax.validation.constraints.NotNull
 
 @Entity
 @Table(name = "game")
 data class Game(
 
-        @Id
-        @GeneratedValue(strategy = GenerationType.IDENTITY)
-        var id: Long? = null,
-
         @Column(name = "name")
+        @get:NotNull
         var name: String = "",
 
         @Column(name = "description")
         var description: String = "",
 
+        @Column(name = "icon")
+        var icon: ByteArray? = null,
+
         @Column(name = "image")
         var image: ByteArray? = null,
 
         @Column(name = "version")
-        var version: String = "1.0"
-) {
+        var version: String = "",
+
+        @Column(name = "file")
+        @get:NotNull
+        var file: ByteArray? = null
+
+
+) : AbstractApplicationEntity() {
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
@@ -34,7 +41,5 @@ data class Game(
         return true
     }
 
-    override fun hashCode(): Int {
-        return id?.hashCode() ?: 0
-    }
+    override fun hashCode(): Int = id?.hashCode() ?: 0
 }
